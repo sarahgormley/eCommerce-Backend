@@ -1,9 +1,6 @@
 const router = require('express').Router();
 const { Product, Category, Tag, ProductTag } = require('../../models');
 
-// The `/api/products` endpoint
-
-// get all products
 router.get('/', (req, res) => {
   try {
     const productData = await Product.findAll({
@@ -17,9 +14,7 @@ router.get('/', (req, res) => {
 }
 });
 
-// get one product
 router.get('/:id', (req, res) => {
-  // find a single product by its `id`
   try {
     const productData = await Product.findByPk(req.params.id, {
         include: [
@@ -36,7 +31,6 @@ router.get('/:id', (req, res) => {
 }
 });
 
-// create new product
 router.post('/', (req, res) => {
   Product.create(req.body)
     .then((product) => {
@@ -58,7 +52,6 @@ router.post('/', (req, res) => {
     });
 });
 
-// update product
 router.put('/:id', (req, res) => {
   Product.update(req.body, {
     where: {
@@ -98,7 +91,6 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-  // delete one product by its `id` value
   try {
     const productData = await Product.destroy({
         where: {
